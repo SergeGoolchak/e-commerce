@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "bundle.css",
+  "sources": [
+    "../../App.svelte"
+  ],
+  "sourcesContent": [
+    "<script>\n\n\timport { onMount, onDestroy } from 'svelte';\n    import Cookies from 'js-cookie/src/js.cookie.js'\n\n   let wear = [];\n\n    function getRef(id) {return document.getElementById(id).href;};\n\n    const CSRF_TOKEN = Cookies.get('csrftoken');\n    const PRODUCT_URL = getRef(\"product-ref\");\n\n    onMount(async () => { const response = await fetch(PRODUCT_URL, {\n                            headers: {\n                                'Accept': 'application/json, text-plain, */*',\n                                'X-Requested-With': 'XMLHttpRequest',\n                            }, });\n        let wear_json = await response.json();\n        wear = wear_json['product'];\n        wear = wear;\n        console.log(wear);\n        console.log(typeof(wear));\n    });\n\n</script>\n\n<main>\n\n\t<section class=\"related-product spad\">\n\t\t<div class=\"container\">\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"col-lg-12 text-center\">\n\t\t\t\t\t<div class=\"section-title\">\n\t\t\t\t\t\t<h2>Related Products</h2>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"row\">\n\t\t\t{#each wear as item }\n\t\t\t\t<div class=\"col-lg-3 col-sm-6\">\n\t\t\t\t\t<div class=\"single-product-item\">\n\t\t\t\t\t\t<figure>\n\t\t\t\t\t\t\t<a href=\".\"><img src='/static/shop/img/{item.img}' alt=\"\"></a>\n\t\t\t\t\t\t\t<div class={item.status}>{item.status_text}</div>\n\t\t\t\t\t\t</figure>\n\t\t\t\t\t\t<div class=\"product-text\">\n\t\t\t\t\t\t\t<h6>{item.name}</h6>\n\t\t\t\t\t\t\t<p>{item.price}</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t{/each}\n\t\t\t</div>\n\t\t</div>\n\t</section>\n\n\n</main>\n\n<style>\n\tmain {\n\t\ttext-align: center;\n\t\tpadding: 1em;\n\t\tmax-width: 240px;\n\t\tmargin: 0 auto;\n\t}\n\n\th1 {\n\t\tcolor: #ff3e00;\n\t\ttext-transform: uppercase;\n\t\tfont-size: 4em;\n\t\tfont-weight: 100;\n\t}\n\n\t@media (min-width: 640px) {\n\t\tmain {\n\t\t\tmax-width: none;\n\t\t}\n\t}\n</style>"
+  ],
+  "names": [],
+  "mappings": "AA4DC,IAAI,eAAC,CAAC,AACL,UAAU,CAAE,MAAM,CAClB,OAAO,CAAE,GAAG,CACZ,SAAS,CAAE,KAAK,CAChB,MAAM,CAAE,CAAC,CAAC,IAAI,AACf,CAAC,AASD,MAAM,AAAC,YAAY,KAAK,CAAC,AAAC,CAAC,AAC1B,IAAI,eAAC,CAAC,AACL,SAAS,CAAE,IAAI,AAChB,CAAC,AACF,CAAC"
+}
